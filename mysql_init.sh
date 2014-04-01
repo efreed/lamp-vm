@@ -9,9 +9,9 @@ function say {
 # specify starting folder
 cd /vagrant
 
-for f in *-bak.sql.gz
+for f in *-init.sql.gz
 do
-  db=${f/-bak.sql.gz/}
+  db=${f/-init.sql.gz/}
   if [ "$db" = "*" ]; then
     #do nothing
     printf ""
@@ -24,14 +24,14 @@ do
   fi
 done
 
-for f in *-bak.sql
+for f in *-init.sql
 do
-  db=${f/-bak.sql/}
+  db=${f/-init.sql/}
   if [ "$db" = "*" ]; then
     echo "=================================================================="
     echo "To restore from a mysql database:"
-    echo "  Name the sql dump file in this format:  databasename-bak.sql"
-    echo "  Or the gzipped sql file in this format:  databasename-bak.sql.gz"
+    echo "  Name the sql dump file in this format:  databasename-init.sql"
+    echo "  Or the gzipped sql file in this format:  databasename-init.sql.gz"
     echo "  and place in the same folder as Vagrantfile" 
     echo "=================================================================="
   elif [ -f "/var/restored_$db" ]; then

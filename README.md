@@ -17,7 +17,7 @@
 - The root user for the mysql server has a blank password, this should be secured accordingly
 	
 # To Start The VM
-Before starting the VM the first time, place one or more mysql dump files in this folder.  Format the filename to be either _databasename-bak.sql_ or _databasename-bak.sql.gz_
+Before starting the VM the first time, place one or more mysql dump files in this folder.  Format the filename to be either _databasename-init.sql_ or _databasename-init.sql.gz_
 
 In Windows, you can use the convenience commands in the Windows folder, just run the Start command
 Documentation is at [VagrantUp.com](http://docs.vagrantup.com/v2/cli), become familiar with these common commands:
