@@ -1,0 +1,31 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@fivetalent.com
+    ServerName local.websitename.com
+ 
+  # Copied form prod server:
+  DocumentRoot /var/www
+  <Directory /var/www>
+    Options -Includes +ExecCGI +FollowSymlinks -MultiViews
+    AllowOverride None
+    order allow,deny
+    allow from all
+
+    <IfModule sapi_apache2.c>
+        php_admin_flag engine on
+        php_admin_flag safe_mode off
+    </IfModule>
+    <IfModule mod_php5.c>
+        php_admin_flag engine on
+        php_admin_flag safe_mode off
+    </IfModule>
+
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml application/x-javascript
+
+    php_flag magic_quotes_gpc Off
+
+    RewriteEngine on
+    RewriteCond $1 !^(index\.php|static|favicon\.ico)
+    RewriteRule ^(.*)$ /index.php/$1 [L]
+  </Directory>
+
+</VirtualHost>
