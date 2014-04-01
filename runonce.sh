@@ -22,7 +22,7 @@ say "Installing Apache and setting it up."
     # Remove /var/www path
     rm -rf /var/www
     # Symbolic link to webroot folder in the repository
-    ln -fs /reporoot/SourceCode/app/controllers/www /var/www
+    ln -fs /reporoot/path-to-website /var/www
     # Enable mod_rewrite
     a2enmod rewrite
  
