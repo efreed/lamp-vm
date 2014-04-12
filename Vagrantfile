@@ -33,11 +33,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # end
 
   # Shell-based provisioning
-  config.vm.provision "shell", path: "runonce.sh"
- 
-  # Scripts to run as sudo on every "vagrant provision"
-  config.vm.provision "shell", path: "mysql_init.sh"
-  config.vm.provision "shell", path: "refresh_vhost.sh"
+  config.vm.provision "shell", path: "build/#build.sh"
  
   # Scripts to run not as sudo on every "vagrant provision"
   #config.vm.provision "shell", path: 'file.sh', privileged: false

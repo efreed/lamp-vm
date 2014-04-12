@@ -12,10 +12,15 @@
 - Define what services you want accessible from _localhost_ by editing the "forwarded_port" commands in Vagrantfile
 - These contents are expected to be one folder deep from the root of the repository (such as /server).  If that's not the case, edit line 27 of Vagrantfile
 - From within the VM, the path "/reporoot/" will read/write from/to the repository
-- You need to specify on line 25 of runonce.sh where in the repo is the webroot
+- The root of the repo is the default website root.  Edit this on on line 7 of build/#build.sh
 - You'll likely be customizing the default.vhost file for your project
 - The root user for the mysql server has a blank password, this should be secured accordingly
-	
+
+# To configure what's installed
+- In the /build folder, files starting with a # are commented out (will not be run)
+- Comment/uncomment files to change what's included in the build
+- Run "vagrant provision" to re-do the build, except files ending with "_install.sh" will not be included
+
 # To Start The VM
 Before starting the VM the first time, place one or more mysql dump files in this folder.  Format the filename to be either _databasename-init.sql_ or _databasename-init.sql.gz_
 
