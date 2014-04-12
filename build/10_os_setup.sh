@@ -14,3 +14,7 @@ say "Updating the package manager"
  
 say "Installing handy packages"
     apt-get install -y curl git-core ftp zip unzip imagemagick vim colordiff >/dev/null 2>&1
+
+
+# Don't run this build script again
+success=TRUE

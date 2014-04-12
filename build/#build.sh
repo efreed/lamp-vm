@@ -26,21 +26,14 @@ cd /vagrant/build
 
 for buildscript in *.sh
 do
-  run="yes"
-  if [[ $buildscript == "#"* ]]; then
-    run="no"
-  elif [[ $buildscript == *_install.sh ]]; then
-    if [[ -f "/var/ran_$buildscript" ]]; then
-      run="no"
-    fi
-  fi
-  if [ $run == "yes" ]; then
+  if [[ $buildscript != "#"* ]] && [[ ! -f "/vagrant/build/$buildscript.done" ]]; then
     # rewrite the script with \r\n converted to \n
     #perl -pi -e 's/\r//' "$buildscript"
     # run the script
+    success=FALSE
     source "$buildscript"
-    if [[ $buildscript == *_install.sh ]]; then
-      touch "/var/ran_$buildscript"
+    if [[ $success != FALSE ]]; then
+      touch "/vagrant/build/$buildscript.done"
       say "FINISHED $buildscript (and won't run it again)"
     else
       say "FINISHED $buildscript"

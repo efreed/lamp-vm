@@ -19,7 +19,7 @@
 # To configure what's installed
 - In the /build folder, files starting with a # are commented out (will not be run)
 - Comment/uncomment files to change what's included in the build
-- Run "vagrant provision" to re-do the build, except files ending with "_install.sh" will not be included
+- Scripts that don't set success=TRUE will run again with the "vagrant provision" command
 
 # To Start The VM
 Before starting the VM the first time, place one or more mysql dump files in this folder.  Format the filename to be either _databasename-init.sql_ or _databasename-init.sql.gz_
