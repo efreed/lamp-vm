@@ -26,14 +26,14 @@ cd /vagrant/build
 
 for buildscript in *.sh
 do
-  if [[ $buildscript != "#"* ]] && [[ ! -f "/vagrant/build/$buildscript.done" ]]; then
+  if [[ $buildscript != "#"* ]] && [[ ! -f "/var/$buildscript.done" ]]; then
     # rewrite the script with \r\n converted to \n
     #perl -pi -e 's/\r//' "$buildscript"
     # run the script
     success=FALSE
     source "$buildscript"
     if [[ $success != FALSE ]]; then
-      touch "/vagrant/build/$buildscript.done"
+      touch "/var/$buildscript.done"
       say "FINISHED $buildscript (and won't run it again)"
     else
       say "FINISHED $buildscript"

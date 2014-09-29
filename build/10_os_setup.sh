@@ -9,11 +9,11 @@ say "Set Time Zone."
     #cp /usr/share/zoneinfo/America/New_York /etc/localtime
  
 say "Updating the package manager"
-    # Update aptitude library
-    apt-get update >/dev/null 2>&1
+    # Update library
+    yum update >/dev/null 2>&1
  
 say "Installing handy packages"
-    apt-get install -y curl git-core ftp zip unzip imagemagick vim colordiff >/dev/null 2>&1
+    yum install -y vim curl git-core ftp zip unzip locate >/dev/null 2>&1
 
 
 # Don't run this build script again

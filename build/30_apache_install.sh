@@ -1,21 +1,28 @@
 
 say "Installing Apache and setting it up."
-    # Install apache2 
-    apt-get install -y apache2 >/dev/null 2>&1
-    # Remove /var/www path
-    rm -rf /var/www
+    # Install apache2 (run yum groupinfo "Web Server" for what packages are included)
+    yum groupinstall -y "Web Server" >/dev/null 2>&1
+    # Remove /var/www/html path
+    rm -rf /var/www/html
     # Symbolic link to webroot folder in the repository
-    ln -fs "/reporoot$pathToWebroot" /var/www
-    # Enable mod_rewrite
-    a2enmod rewrite >/dev/null 2>&1
+    ln -fs "/reporoot$pathToWebroot" /var/www/html
     # Remove log folder
-    rm -rf /var/log/apache2
+    rm -rf /etc/httpd/logs
     # Symbolic link to logs folder in the host system
-    ln -fs /vagrant/apachelogs /var/log/apache2
+    ln -fs /vagrant/apachelogs /etc/httpd/logs
+    # set to run on startup
+    chkconfig httpd on
+    service httpd start
  
 say "Installing PHP Modules"
-    # Install php5, libapache2-mod-php5, php5-mysql curl php5-curl
-    apt-get install -y php5 php5-cli php5-common php5-dev php5-imagick php5-imap php5-gd libapache2-mod-php5 php5-mysql php5-curl >/dev/null 2>&1
+    # for 5.3.3:  yum groupinstall -y "PHP Support" >/dev/null 2>&1
+    # for 5.4.29:
+    rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm >/dev/null 2>&1
+    yum install -y php54w php54w-gd php54w-pear php54w-xml php54w-mysqlnd php54w-mbstring php54w-soap php54w-mcrypt
+    # configure pacific time
+    sed -i -e 's/;date.timezone =/date.timezone = America\/Los_Angeles/' /etc/php.ini
+    sed -i -e 's/short_open_tag=Off/short_open_tag=On/' /etc/php.ini
+    service httpd restart
  
 # Don't run this build script again
 success=TRUE
