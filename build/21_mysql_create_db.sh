@@ -2,14 +2,20 @@
 # specify folder containing database backups
 cd /vagrant
 
-skippedAGz="no"
+echo ""
+echo "=================================================================="
+echo "To restore from a mysql database:"
+echo "  Name the sql dump file in this format:  databasename-init.sql"
+echo "  Or the gzipped sql file in this format:  databasename-init.sql.gz"
+echo "  and place in the same folder as Vagrantfile" 
+echo "=================================================================="
 
 for f in *-init.sql.gz
 do
   db=${f/-init.sql.gz/}
   if [ "$db" = "*" ]; then
     #do nothing
-    skippedAGz="yes"
+    dummy="yes"
   elif [ -f "/var/restored_$db" ]; then
     say "Skipping uncompress of $db"
   else
@@ -23,14 +29,8 @@ for f in *-init.sql
 do
   db=${f/-init.sql/}
   if [ "$db" = "*" ]; then
-    if [ "$skippedAGz" = "no" ]; then
-      echo "=================================================================="
-      echo "To restore from a mysql database:"
-      echo "  Name the sql dump file in this format:  databasename-init.sql"
-      echo "  Or the gzipped sql file in this format:  databasename-init.sql.gz"
-      echo "  and place in the same folder as Vagrantfile" 
-      echo "=================================================================="
-    fi
+    # * is thrown into file search results sometimes, don't look for a db named *
+    dummy="yes"
   elif [ -f "/var/restored_$db" ]; then
     say "Skipping db restore of $db"
   else

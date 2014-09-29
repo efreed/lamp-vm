@@ -31,7 +31,7 @@ do
     #perl -pi -e 's/\r//' "$buildscript"
     # run the script
     success=FALSE
-    source "$buildscript"
+    source "/vagrant/build/$buildscript"
     if [[ $success != FALSE ]]; then
       touch "/var/$buildscript.done"
       say "FINISHED $buildscript (and won't run it again)"

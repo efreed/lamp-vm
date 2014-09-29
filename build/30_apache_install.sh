@@ -1,4 +1,3 @@
-
 say "Installing Apache and setting it up."
     # Install apache2 (run yum groupinfo "Web Server" for what packages are included)
     yum groupinstall -y "Web Server" >/dev/null 2>&1
@@ -18,11 +17,15 @@ say "Installing PHP Modules"
     # for 5.3.3:  yum groupinstall -y "PHP Support" >/dev/null 2>&1
     # for 5.4.29:
     rpm -Uvh http://mirror.webtatic.com/yum/el6/latest.rpm >/dev/null 2>&1
-    yum install -y php54w php54w-gd php54w-pear php54w-xml php54w-mysqlnd php54w-mbstring php54w-soap php54w-mcrypt
+    yum install -y php54w php54w-gd php54w-pear php54w-xml php54w-mysqlnd php54w-mbstring php54w-soap php54w-mcrypt >/dev/null 2>&1
     # configure pacific time
     sed -i -e 's/;date.timezone =/date.timezone = America\/Los_Angeles/' /etc/php.ini
     sed -i -e 's/short_open_tag=Off/short_open_tag=On/' /etc/php.ini
     service httpd restart
- 
+
+say "Installing Composer"
+    curl -sS https://getcomposer.org/installer | php >/dev/null 2>&1
+    mv composer.phar /usr/local/bin/composer
+
 # Don't run this build script again
 success=TRUE
